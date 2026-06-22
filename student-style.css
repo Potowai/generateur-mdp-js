@@ -1,0 +1,179 @@
+/* ===== STYLE de la version Student du TP ===== */
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #09090b;
+    color: #fafafa;
+    padding: 20px;
+}
+
+.card {
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0 0 4px;
+}
+
+.sub {
+    color: #a1a1aa;
+    font-size: 13px;
+    margin: 0 0 24px;
+}
+
+/* Toggle */
+.toggle {
+    display: flex;
+    gap: 4px;
+    background: #09090b;
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+.toggle button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    color: #a1a1aa;
+    transition: .15s;
+}
+.toggle button.on {
+    background: #18181b;
+    color: #fafafa;
+}
+.toggle button:not(.on):hover { color: #fafafa; }
+
+/* Résultat */
+.resultat {
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 10px;
+    padding: 18px;
+    font-size: 18px;
+    font-family: monospace;
+    word-break: break-all;
+    min-height: 56px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+/* Options */
+.opt { margin-bottom: 20px; }
+.opt label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.opt label span { color: #22c55e; font-weight: 700; }
+
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #27272a;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #fafafa;
+    border: 3px solid #18181b;
+    cursor: pointer;
+}
+
+.hint {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #a1a1aa;
+    margin-top: 6px;
+}
+
+/* Cases à cocher stylées */
+.grp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.grp label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: .15s;
+}
+.grp label:has(input:checked) {
+    border-color: #22c55e;
+    color: #fafafa;
+}
+.grp input { display: none; }
+
+/* Boutons */
+.actions { display: flex; gap: 8px; }
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .15s;
+}
+.btn-prim {
+    background: #fafafa;
+    color: #09090b;
+}
+.btn-prim:hover { opacity: .85; }
+.btn-sec {
+    background: transparent;
+    border: 1px solid #27272a;
+    color: #fafafa;
+}
+.btn-sec:hover { background: #27272a; }
+
+.msg {
+    font-size: 13px;
+    color: #a1a1aa;
+    min-height: 20px;
+    text-align: center;
+    margin: 14px 0 0;
+}
+.msg.ok { color: #22c55e; }
+.msg.err { color: #ef4444; }
+
+@media (max-width: 460px) {
+    .card { padding: 20px; }
+    .grp { flex-direction: column; }
+}
