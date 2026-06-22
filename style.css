@@ -1,3 +1,7 @@
+/* ============================================================
+   Générateur — style shadcn dark + signature glow
+   ============================================================ */
+
 :root {
     --bg: #09090b;
     --card: #18181b;
@@ -5,11 +9,14 @@
     --border: #27272a;
     --text: #fafafa;
     --muted: #a1a1aa;
-    --primary: #fafafa;
-    --primary-foreground: #18181b;
-    --accent: #22c55e;
+    --accent: #fafafa;
+    --ok: #22c55e;
     --err: #ef4444;
-    --radius: 0.5rem;
+    --radius: 12px;
+
+    /* strength glow colors – set by JS */
+    --glow: var(--ok);
+    --glow-alpha: 0.25;
 }
 
 * { box-sizing: border-box; }
@@ -24,93 +31,134 @@ body {
     background: var(--bg);
     color: var(--text);
     padding: 20px;
+    line-height: 1.5;
 }
 
+/* ---- Container ---- */
 .container {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 32px;
+    padding: 36px;
     width: 100%;
-    max-width: 480px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    max-width: 460px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.5);
 }
 
-.brand {
-    font-size: 13px;
+/* ---- Typography ---- */
+.supertitle {
+    font-size: 11px;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 4px;
+    letter-spacing: 2.5px;
+    margin: 0 0 6px;
 }
 
 h1 {
-    font-size: 22px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
     font-weight: 700;
-    margin: 0 0 20px;
+    margin: 0 0 24px;
+    line-height: 1.2;
     color: var(--text);
 }
+h1 .or {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-/* Mode toggle */
+/* ---- Toggle tabs ---- */
 .mode-toggle {
     display: flex;
-    gap: 6px;
+    gap: 4px;
     background: var(--bg);
     padding: 4px;
-    border-radius: var(--radius);
-    margin-bottom: 20px;
+    border-radius: 10px;
+    margin-bottom: 24px;
 }
 .mode-btn {
     flex: 1;
-    padding: 8px 12px;
+    padding: 10px 12px;
     border: none;
-    border-radius: calc(var(--radius) - 2px);
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     background: transparent;
     color: var(--muted);
-    transition: all .15s;
+    transition: all .2s;
 }
 .mode-btn.active {
-    background: var(--card-hover);
+    background: var(--card);
     color: var(--text);
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
 }
 .mode-btn:not(.active):hover {
     color: var(--text);
 }
 
-/* Result box */
+/* ---- Result box (signature element) ---- */
+.resultat-wrap {
+    position: relative;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    transition: box-shadow .4s ease;
+    box-shadow: 0 0 0 0 transparent;
+}
+.resultat-wrap.has-glow {
+    box-shadow:
+        0 0 20px color-mix(in srgb, var(--glow) 30%, transparent),
+        0 0 60px color-mix(in srgb, var(--glow) 12%, transparent);
+}
+
 .resultat {
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    font-size: 18px;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 20px;
     font-family: 'SFMono-Regular', Consolas, monospace;
-    margin-bottom: 20px;
     letter-spacing: 2px;
     word-break: break-all;
-    min-height: 54px;
+    min-height: 60px;
     line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    transition: border-color .3s;
 }
 
-/* Options */
-.options {
+/* ---- Fields (slider groups) ---- */
+.options-group {
+    margin-bottom: 20px;
+}
+.field {
     margin-bottom: 16px;
 }
-.options label {
+.field-head {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    font-weight: 500;
+    align-items: baseline;
     margin-bottom: 8px;
 }
-.options label span {
-    color: var(--accent);
-    font-weight: 700;
+.field-label {
+    font-size: 14px;
+    font-weight: 500;
 }
+.field-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ok);
+    font-variant-numeric: tabular-nums;
+    min-width: 2ch;
+    display: inline-block;
+    text-align: right;
+}
+
 input[type="range"] {
     width: 100%;
     height: 6px;
@@ -119,94 +167,148 @@ input[type="range"] {
     background: var(--border);
     border-radius: 3px;
     outline: none;
+    cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: var(--primary);
+    background: white;
+    border: 3px solid var(--card);
+    box-shadow: 0 2px 6px rgba(0,0,0,.4);
     cursor: pointer;
-    border: 2px solid var(--card);
-    box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    transition: transform .15s;
 }
-.range-labels {
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--card);
+    box-shadow: 0 2px 6px rgba(0,0,0,.4);
+    cursor: pointer;
+}
+
+.range-hint {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
     color: var(--muted);
     margin-top: 6px;
 }
-.range-labels .strength {
-    color: var(--accent);
+.range-hint kbd {
+    background: var(--card-hover);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--muted);
+}
+.strength-badge {
     font-weight: 600;
+    color: var(--ok);
 }
 
-/* Checkboxes */
-.checkboxes {
+/* ---- Chips (checkboxes) ---- */
+.chip-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 8px;
 }
-.check-label {
-    font-size: 14px;
-    color: var(--muted);
-    cursor: pointer;
-    display: flex;
+.chip {
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-}
-.check-label input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--accent);
+    padding: 7px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--muted);
     cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+}
+.chip:has(input:checked) {
+    border-color: var(--ok);
+    color: var(--text);
+    background: color-mix(in srgb, var(--ok) 8%, var(--bg));
+}
+.chip input[type="checkbox"] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+}
+.chip:hover {
+    border-color: var(--card-hover);
+    color: var(--text);
 }
 
-/* Action buttons */
+/* ---- Buttons ---- */
 .actions {
     display: flex;
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
-button {
+.btn-primary {
     flex: 1;
-    padding: 12px 20px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background .15s, opacity .15s;
-    background: var(--primary);
-    color: var(--primary-foreground);
+    background: white;
+    color: var(--primary-foreground, #18181b);
+    transition: opacity .15s, transform .15s;
 }
-button:hover {
+.btn-primary:hover {
     opacity: .85;
+    transform: translateY(-1px);
 }
-.btn-secondaire {
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    flex: 0 0 auto;
+    padding: 14px 24px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
     background: transparent;
     color: var(--text);
+    transition: background .15s;
 }
-.btn-secondaire:hover {
+.btn-secondary:hover {
     background: var(--card-hover);
 }
 
+/* ---- Message ---- */
 .message {
     font-size: 13px;
     color: var(--muted);
     min-height: 20px;
     text-align: center;
+    margin: 0;
+    transition: color .2s;
 }
-.message.ok {
-    color: var(--accent);
-}
-.message.err {
-    color: var(--err);
-}
+.message.ok { color: var(--ok); }
+.message.err { color: var(--err); }
 
+/* ---- Responsive ---- */
 @media (max-width: 480px) {
-    .container { padding: 20px; }
-    .checkboxes { flex-direction: column; gap: 8px; }
+    .container { padding: 24px 18px; border-radius: 10px; }
+    h1 { font-size: 24px; }
+    .resultat { font-size: 16px; padding: 16px; }
+    .chip { padding: 6px 12px; font-size: 12px; }
+    .actions { flex-direction: column; }
+    .btn-secondary { flex: 1; }
 }

@@ -3,67 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Générateur de Mots de Passe</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Générateur — Mots de passe &amp; phrases de passe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <div class="brand">🔐 Générateur</div>
-        <h1>Mot de passe &amp; Phrase de passe</h1>
+        <p class="supertitle">Générateur</p>
+        <h1>Mot de passe<br><span class="or">ou</span> phrase de passe</h1>
 
-        <!-- Toggle mode -->
-        <div class="mode-toggle">
-            <button id="btnPassword" class="mode-btn active">Mot de passe</button>
-            <button id="btnPassphrase" class="mode-btn">Phrase de passe</button>
+        <!-- Toggle -->
+        <div class="mode-toggle" role="tablist">
+            <button id="btnPassword" class="mode-btn active" role="tab" aria-selected="true">Mot de passe</button>
+            <button id="btnPassphrase" class="mode-btn" role="tab">Phrase de passe</button>
         </div>
 
-        <!-- Result -->
-        <div class="resultat" id="resultat">Clique sur Générer</div>
+        <!-- Resultat -->
+        <div class="resultat-wrap">
+            <div class="resultat" id="resultat">Clique sur Générer</div>
+        </div>
 
-        <!-- Password options (visible en mode mot de passe) -->
-        <div id="passwordOptions">
-            <div class="options">
-                <label>Longueur : <span id="longueurAffichage">16</span></label>
+        <!-- Options mot de passe -->
+        <div id="passwordOptions" class="options-group">
+            <div class="field">
+                <div class="field-head">
+                    <span class="field-label">Longueur</span>
+                    <span class="field-value" id="longueurAffichage">16</span>
+                </div>
                 <input type="range" id="slider" min="6" max="128" value="16">
-                <div class="range-labels">
+                <div class="range-hint">
                     <span>6</span>
-                    <span class="strength" id="strengthLabel">Moyen</span>
+                    <span class="strength-badge" id="strengthLabel">Moyen</span>
                     <span>128</span>
                 </div>
             </div>
-            <div class="checkboxes">
-                <label class="check-label"><input type="checkbox" id="chkMaj" checked> Majuscules</label>
-                <label class="check-label"><input type="checkbox" id="chkChiffres" checked> Chiffres</label>
-                <label class="check-label"><input type="checkbox" id="chkSymboles" checked> Symboles</label>
+            <div class="chip-group">
+                <label class="chip"><input type="checkbox" id="chkMaj" checked><span>A–Z</span></label>
+                <label class="chip"><input type="checkbox" id="chkChiffres" checked><span>0–9</span></label>
+                <label class="chip"><input type="checkbox" id="chkSymboles" checked><span>!@#$%&amp;*</span></label>
             </div>
         </div>
 
-        <!-- Passphrase options (visible en mode phrase de passe) -->
-        <div id="passphraseOptions" style="display:none;">
-            <div class="options">
-                <label>Nombre de mots : <span id="nbMotsAffichage">4</span></label>
+        <!-- Options phrase de passe -->
+        <div id="passphraseOptions" class="options-group" style="display:none">
+            <div class="field">
+                <div class="field-head">
+                    <span class="field-label">Mots</span>
+                    <span class="field-value" id="nbMotsAffichage">4</span>
+                </div>
                 <input type="range" id="sliderMots" min="2" max="8" value="4">
-                <div class="range-labels">
+                <div class="range-hint">
                     <span>2</span>
-                    <span id="sepLabel">séparateur : -</span>
+                    <span>séparateur <kbd>-</kbd></span>
                     <span>8</span>
                 </div>
             </div>
-            <div class="checkboxes">
-                <label class="check-label"><input type="checkbox" id="chkMajPremier" checked> Majuscule 1ère lettre</label>
-                <label class="check-label"><input type="checkbox" id="chkChiffreFin"> Ajouter un chiffre à la fin</label>
+            <div class="chip-group">
+                <label class="chip"><input type="checkbox" id="chkMajPremier" checked><span>Première lettre en majuscule</span></label>
+                <label class="chip"><input type="checkbox" id="chkChiffreFin"><span>+ chiffre à la fin</span></label>
             </div>
         </div>
 
         <!-- Actions -->
         <div class="actions">
-            <button id="bouton">Générer</button>
-            <button id="copier" class="btn-secondaire">Copier</button>
+            <button id="bouton" class="btn-primary">Générer</button>
+            <button id="copier" class="btn-secondary">Copier</button>
         </div>
 
-        <p id="message" class="message"></p>
+        <p id="message" class="message" aria-live="polite"></p>
     </div>
 
     <script src="script.js"></script>
