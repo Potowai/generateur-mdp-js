@@ -284,9 +284,12 @@ console.log("hello world!");
 // Écris ton code ci-dessous :
 `,
 
-    2: `// Mission : crée une variable et affiche-la
-// 1. Crée une variable nom qui contient "JS Academy"
-// 2. Affiche-la avec console.log
+    2: `// Exemple avec une variable "groupe":
+let groupe = "La Poste";
+console.log("Bonjour " + groupe);  // Affiche "Bonjour La Poste"
+
+// Mission : crée une variable groupe avec "JS Academy"
+// et affiche "Bienvenue à JS Academy"
 `,
 
     3: `// Mission : utilise les lettres du tableau pour former le mot "ace"
@@ -361,10 +364,15 @@ let mdp = "";
 console.log(mdp);
 `,
 
-    10: `// Mission : change le texte dans la zone de droite
-let out = document.getElementById("out");
-out.textContent = "Écris ton prénom ici !";
-// Ajoute console.log("Bravo") pour valider la mission
+    10: `// Mission : génère un mot de passe depuis un tableau de caractères
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+let caracteres = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9","!","@","#","$","%","&","*"];
+let mdp = "";
+// Boucle de 8 tours : utilise randomInt(0, caracteres.length - 1) comme index
+
+console.log(mdp);
 `,
 
     11: `// Mission : génère deux mots de passe avec une fonction
@@ -388,11 +396,27 @@ let mdp = "";
 
 console.log("Longueur : " + longueur);
 console.log("Mot de passe : " + mdp);
+`,
+
+    13: `// 🌟 DÉFI BONUS : Générateur de phrase de passe
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let mots = ["soleil","lune","etoile","nuage","pluie","vent","feu","terre","mer","montagne","riviere","foret","chemin","jardin","fleur","arbre","pierre","sable","glace","feuille","ciel","arc","fleche","pont","tour","chateau","porte","clef","lampe","miroir","livre","table","chaise","fenetre","mur","toit","escalier","salle","cuisine","jardin","bureau","ecole","cahier","stylo","crayon","gomme","regle","sac","balle","jeu","film","musique","danse","chant","fete","amour","ami","coeur","reve","sage","fort","doux","libre","grand","petit","long","clair","frais","pur","vrai","beau","bon","neuf","vif","calme","chaud","triste","gai","jeune","vieux","pauvre","riche","simple","noble","digne","saint","fier","juste","sage","hardi","loyal","brave","doux","fin","subtil","vague","brume","orage","clairon","lutin","geant","sorcier","elfe","dragon","phoenix","licorne"];
+let phrase = "";
+let nbMots = 4;
+
+// Boucle : choisis nbMots mots aléatoires dans le tableau "mots"
+// Relie-les avec des tirets "-"
+// Exemple : "soleil-lune-feu-vent"
+
+console.log(phrase);
 `};
 
 const missions = {
     1: { title: "Itération 1 : Console", text: "Voici un exemple : <code>console.log('hello world!')</code>.<br>Mission : affiche <strong>Salut + ton prénom !</strong>", check: logs => logs.some(l => l.toLowerCase().includes("salut")) },
-    2: { title: "Itération 2 : Variables", text: "Crée une variable <strong>nom</strong> et affiche-la. La sortie doit contenir <strong>JS Academy</strong>.", check: logs => logs.some(l => l.includes("JS Academy")) },
+    2: { title: "Itération 2 : Variables", text: "Exemple : <code>let groupe = \"La Poste\"; console.log(\"Bonjour \" + groupe);</code><br>Mission : crée une variable <strong>groupe</strong> avec <strong>\"JS Academy\"</strong> et affiche <strong>Bienvenue à JS Academy</strong>.", check: logs => logs.some(l => l.includes("JS Academy")) },
     3: { title: "Itération 3 : Tableaux", text: "Utilise les lettres du tableau pour former le mot <strong>ace</strong> (1ère + 3ème + 5ème lettre).", check: logs => logs.some(l => l.includes("ace")) },
     4: { title: "Itération 4 : Boucle", text: "Affiche les nombres <strong>1 2 3 4 5</strong> avec une boucle for.", check: logs => logs.join(" ").includes("1") && logs.join(" ").includes("5") },
     5: { title: "Itération 5 : Aléatoire", text: "On te donne une fonction magique <strong>randomInt(min, max)</strong>. Modifie les deux nombres dans <strong>randomInt(?, ?)</strong> pour obtenir un nombre entre <strong>10</strong> et <strong>20</strong>.", check: logs => logs.some(l => { const n = parseInt(l.trim()); return n >= 10 && n <= 20; }) },
@@ -400,9 +424,10 @@ const missions = {
     7: { title: "Itération 7 : Générateur simple", text: "Génère un mot de passe de <strong>6 lettres minuscules</strong>.", check: logs => logs.some(l => /^[a-z]{6}$/.test(l.trim())) },
     8: { title: "Itération 8 : Majuscules", text: "Génère un mot de passe de <strong>8 caractères</strong> avec des minuscules et des majuscules.", check: logs => logs.some(l => /^[a-zA-Z]{8}$/.test(l.trim()) && /[a-z]/.test(l) && /[A-Z]/.test(l)) },
     9: { title: "Itération 9 : Tous les caractères", text: "Génère un mot de passe de <strong>12 caractères</strong> contenant lettres, chiffres et symboles.", check: logs => logs.some(l => /^[a-zA-Z0-9!@#$%&*]{12}$/.test(l.trim()) && /[a-z]/.test(l) && /[A-Z]/.test(l) && /[0-9]/.test(l) && /[!@#$%&*]/.test(l)) },
-    10: { title: "Itération 10 : HTML", text: "Utilise <strong>document.getElementById('out')</strong> pour changer le texte, puis ajoute <strong>console.log('Bravo')</strong>.", check: logs => logs.some(l => l.toLowerCase().includes("bravo")) },
+    10: { title: "Itération 10 : Mot de passe depuis un tableau", text: "Utilise un tableau de caractères avec <strong>randomInt</strong> pour générer un mot de passe de <strong>8 caractères</strong>. Utilise <code>caracteres[randomInt(0, caracteres.length - 1)]</code>.", check: logs => logs.some(l => /^[a-zA-Z0-9!@#$%&*]{8}$/.test(l.trim())) },
     11: { title: "Itération 11 : Fonction", text: "Crée une fonction <strong>generer()</strong> et affiche deux mots de passe.", check: logs => logs.filter(l => /^[a-zA-Z0-9!@#$%&*]{12,}$/.test(l.trim())).length >= 2 },
-    12: { title: "Itération 12 : Longueur variable", text: "Utilise une variable <strong>longueur</strong> pour choisir la taille du mot de passe.", check: logs => logs.some(l => l.toLowerCase().includes("longueur")) && logs.some(l => /^[a-zA-Z0-9!@#$%&*]{10,}$/.test(l.trim())) }
+    12: { title: "Itération 12 : Longueur variable", text: "Utilise une variable <strong>longueur</strong> pour choisir la taille du mot de passe.", check: logs => logs.some(l => l.toLowerCase().includes("longueur")) && logs.some(l => /^[a-zA-Z0-9!@#$%&*]{10,}$/.test(l.trim())) },
+    13: { title: "🌟 Bonus : Phrase de passe", text: "Défi bonus ! Utilise le dictionnaire de <strong>mots</strong> et une boucle pour générer une phrase de passe de <strong>4 mots</strong> séparés par des tirets.", check: logs => logs.some(l => /^[a-z]+(-[a-z]+){3,}$/.test(l.trim())) }
 };
 
 const itSelect = document.getElementById("it");
@@ -414,7 +439,7 @@ const progressEl = document.getElementById("progress");
 const savedEl = document.getElementById("saved");
 
 // Fill select + progress dots
-for (let i = 1; i <= 12; i++) {
+for (let i = 1; i <= 13; i++) {
     const opt = document.createElement("option");
     opt.value = i;
     opt.textContent = missions[i].title;
@@ -516,7 +541,7 @@ function run() {
 
     if (missions[n].check(logs, htmlChanged)) {
         showSuccess(n);
-        const suite = n < 12 ? " Passe à l'itération " + (n + 1) + "." : " Tu as terminé toutes les itérations.";
+        const suite = n < 13 ? " Passe à l'itération " + (n + 1) + "." : " Tu as terminé toutes les itérations.";
         outEl.innerHTML += '<div class="ok">✓ Itération validée, vous pouvez passer à la suivante.' + suite + '</div>';
     }
 }
