@@ -486,6 +486,7 @@ function run() {
 
     try {
         new Function("console", codeEl.value)(fakeConsole);
+        saveIt(n);
     } catch (e) {
         fakeConsole.error("❌ " + e.message);
     }
