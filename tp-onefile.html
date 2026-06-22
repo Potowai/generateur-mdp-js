@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Générateur de MDP</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        h1 { font-size: 18px; margin: 0; flex: 1; }
+        button {
+            background: #e94560;
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        select {
+            padding: 7px;
+            border-radius: 6px;
+            border: none;
+        }
+        main {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+        textarea {
+            flex: 1;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 14px;
+            border: none;
+            resize: none;
+            outline: none;
+            background: #0d1117;
+            color: #c9d1d9;
+        }
+        #out {
+            flex: 1;
+            padding: 15px;
+            background: #f6f8fa;
+            overflow: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        #out div { margin-bottom: 4px; }
+        #out .err { color: #cf222e; }
+        #out .ok { color: #1a7f37; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎓 TP : Générateur de mot de passe</h1>
+        <select id="it" onchange="loadIt(this.value)">
+            <option value="1">Itération 1 : console.log</option>
+            <option value="2">Itération 2 : variables</option>
+            <option value="3">Itération 3 : tableaux</option>
+            <option value="4">Itération 4 : boucle for</option>
+            <option value="5">Itération 5 : aléatoire</option>
+            <option value="6">Itération 6 : générateur simple</option>
+            <option value="7">Itération 7 : majuscules</option>
+            <option value="8">Itération 8 : chiffres + symboles</option>
+            <option value="9">Itération 9 : HTML</option>
+            <option value="10">Itération 10 : bouton</option>
+            <option value="11">Itération 11 : slider</option>
+        </select>
+        <button onclick="run()">▶ Run</button>
+    </header>
+    <main>
+        <textarea id="code" spellcheck="false"></textarea>
+        <div id="out"></div>
+    </main>
+
+<script>
+const iterations = {
+    1: `// Tape ton code ici puis clique sur Run
+console.log("Bonjour, monde !");`,
+
+    2: `let nomDuSite = "Netflix";
+console.log("Mot de passe pour : " + nomDuSite);
+
+nomDuSite = "Instagram";
+console.log("Maintenant pour : " + nomDuSite);`,
+
+    3: `let lettres = ["a", "b", "c", "d", "e"];
+console.log("Tableau :", lettres);
+console.log("1ère lettre : " + lettres[0]);
+console.log("3ème lettre : " + lettres[2]);
+console.log("Total : " + lettres.length);`,
+
+    4: `for (let i = 0; i < 5; i++) {
+    console.log("Bonjour !");
+}
+
+for (let i = 1; i <= 10; i++) {
+    console.log(i);
+}`,
+
+    5: `// Helper magique pour les débutants
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log("Dé : " + randomInt(1, 6));
+console.log("Entre 0 et 9 : " + randomInt(0, 9));`,
+
+    6: `function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let alphabet = "abcdefghijklmnopqrstuvwxyz";
+let longueur = 8;
+let motDePasse = "";
+
+for (let i = 0; i < longueur; i++) {
+    let index = randomInt(0, alphabet.length - 1);
+    motDePasse += alphabet[index];
+}
+
+console.log("Mot de passe : " + motDePasse);`,
+
+    7: `function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let minuscules = "abcdefghijklmnopqrstuvwxyz";
+let majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let longueur = 10;
+let motDePasse = "";
+
+for (let i = 0; i < longueur; i++) {
+    if (Math.random() < 0.5) {
+        motDePasse += minuscules[randomInt(0, minuscules.length - 1)];
+    } else {
+        motDePasse += majuscules[randomInt(0, majuscules.length - 1)];
+    }
+}
+
+console.log("Mot de passe : " + motDePasse);`,
+
+    8: `function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+let longueur = 12;
+let motDePasse = "";
+
+for (let i = 0; i < longueur; i++) {
+    motDePasse += caracteres[randomInt(0, caracteres.length - 1)];
+}
+
+console.log("Mot de passe : " + motDePasse);`,
+
+    9: `// On peut modifier la page elle-même
+let out = document.getElementById("out");
+out.innerHTML = '<div class="ok">Bravo, tu modifies le HTML !</div>';
+console.log("Regarde à droite →");`,
+
+    10: `// Version complète avec un vrai bouton
+// (en vrai, regarde index.html du projet)
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generer() {
+    let caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+    let mdp = "";
+    for (let i = 0; i < 12; i++) {
+        mdp += caracteres[randomInt(0, caracteres.length - 1)];
+    }
+    return mdp;
+}
+
+console.log("Exemple : " + generer());
+console.log("Exemple : " + generer());`,
+
+    11: `// Slider = une valeur qu'on change
+// Imagine longueurChoisie comme la valeur du slider
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let longueurChoisie = 16;
+let caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+let mdp = "";
+
+for (let i = 0; i < longueurChoisie; i++) {
+    mdp += caracteres[randomInt(0, caracteres.length - 1)];
+}
+
+console.log("Longueur : " + longueurChoisie);
+console.log("Mot de passe : " + mdp);`
+};
+
+const code = document.getElementById("code");
+const out = document.getElementById("out");
+
+function loadIt(n) {
+    code.value = iterations[n];
+    out.innerHTML = '';
+}
+
+function run() {
+    out.innerHTML = '';
+    const fakeConsole = {
+        log: (...args) => out.innerHTML += '<div>' + args.map(String).join(' ') + '</div>',
+        error: (...args) => out.innerHTML += '<div class="err">' + args.map(String).join(' ') + '</div>'
+    };
+    try {
+        new Function("console", code.value)(fakeConsole);
+    } catch (e) {
+        fakeConsole.error("❌ " + e.message);
+    }
+}
+
+loadIt(1);
+</script>
+</body>
+</html>
