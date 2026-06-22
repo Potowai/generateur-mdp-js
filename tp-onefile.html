@@ -303,10 +303,12 @@ for (let i = 1; i <= 5; i++) {
 `,
 
     5: `// Mission : lance un dé (nombre entre 1 et 6)
-// Complète la fonction randomInt :
+// On te donne la fonction magique : randomInt(min, max)
 function randomInt(min, max) {
-    return // à compléter
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Utilise-la pour afficher un nombre entre 1 et 6
 console.log(randomInt(1, 6));
 `,
 
@@ -376,7 +378,7 @@ const missions = {
     2: { title: "Itération 2 : Variables", text: "Crée une variable <strong>nom</strong> et affiche-la. La sortie doit contenir <strong>JS Academy</strong>.", check: logs => logs.some(l => l.includes("JS Academy")) },
     3: { title: "Itération 3 : Tableaux", text: "Utilise les lettres du tableau pour former le mot <strong>ace</strong> (1ère + 3ème + 5ème lettre).", check: logs => logs.some(l => l.includes("ace")) },
     4: { title: "Itération 4 : Boucle", text: "Affiche les nombres <strong>1 2 3 4 5</strong> avec une boucle for.", check: logs => logs.join(" ").includes("1") && logs.join(" ").includes("5") },
-    5: { title: "Itération 5 : Aléatoire", text: "Utilise <strong>randomInt(1, 6)</strong> pour lancer un dé. Le résultat doit être entre 1 et 6.", check: logs => logs.some(l => /^[1-6]$/.test(l.trim())) },
+    5: { title: "Itération 5 : Aléatoire", text: "On te donne une fonction magique <strong>randomInt(min, max)</strong>. Utilise-la pour afficher un nombre entre <strong>1</strong> et <strong>6</strong>.", check: logs => logs.some(l => /^[1-6]$/.test(l.trim())) },
     6: { title: "Itération 6 : Générateur simple", text: "Génère un mot de passe de <strong>6 lettres minuscules</strong>.", check: logs => logs.some(l => /^[a-z]{6}$/.test(l.trim())) },
     7: { title: "Itération 7 : Majuscules", text: "Génère un mot de passe de <strong>8 caractères</strong> avec des minuscules et des majuscules.", check: logs => logs.some(l => /^[a-zA-Z]{8}$/.test(l.trim()) && /[a-z]/.test(l) && /[A-Z]/.test(l)) },
     8: { title: "Itération 8 : Tous les caractères", text: "Génère un mot de passe de <strong>12 caractères</strong> contenant lettres, chiffres et symboles.", check: logs => logs.some(l => /^[a-zA-Z0-9!@#$%&*]{12}$/.test(l.trim()) && /[a-z]/.test(l) && /[A-Z]/.test(l) && /[0-9]/.test(l) && /[!@#$%&*]/.test(l)) },
