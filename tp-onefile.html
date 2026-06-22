@@ -451,31 +451,10 @@ function updateProgress() {
 function showSuccess(n) {
     localStorage.setItem(doneKey(n), "1");
     updateProgress();
-
-    const overlay = document.getElementById("success");
-    const text = document.getElementById("success-text");
-    text.textContent = n < 11
-        ? "Passe maintenant à l'itération " + (n + 1) + " !"
-        : "Tu as terminé toutes les itérations. Félicitations !";
-    overlay.classList.add("show");
-
-    // confetti
-    for (let i = 0; i < 40; i++) {
-        const c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.background = ["#FCDD09", "#0A1E3F", "#ffffff", "#E94560"][Math.floor(Math.random() * 4)];
-        c.style.animationDelay = Math.random() * 0.5 + "s";
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 2600);
-    }
-
-    setTimeout(() => overlay.classList.remove("show"), 2200);
 }
 
 function run() {
     const n = parseInt(itSelect.value);
-    saveIt(n);
     outEl.innerHTML = "";
     const logs = [];
     let htmlChanged = "";
@@ -511,8 +490,9 @@ function run() {
     Object.defineProperty(outEl, "innerHTML", originalInnerHTML);
 
     if (missions[n].check(logs, htmlChanged)) {
-        outEl.innerHTML += '<div class="ok">✓ Mission réussie !</div>';
         showSuccess(n);
+        const suite = n < 11 ? " Passe à l'itération " + (n + 1) + "." : " Tu as terminé toutes les itérations.";
+        outEl.innerHTML += '<div class="ok">✓ Itération validée, vous pouvez passer à la suivante.' + suite + '</div>';
     }
 }
 
