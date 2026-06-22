@@ -3,119 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP La Poste — Générateur de MDP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>TP — Générateur de MDP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --jaune: #FCDD09;
-            --jaune-soft: #FFF6B3;
-            --bleu: #0A1E3F;
-            --bleu-light: #143057;
-            --blanc: #FFFFFF;
-            --gris: #F4F6F8;
-            --text: #1A1F36;
-            --muted: #5E6579;
-            --ok: #1a7f37;
-            --err: #cf222e;
+            --bg: #09090b;
+            --card: #18181b;
+            --card-hover: #27272a;
+            --border: #27272a;
+            --text: #fafafa;
+            --muted: #a1a1aa;
+            --primary: #fafafa;
+            --primary-foreground: #18181b;
+            --ok: #22c55e;
+            --err: #ef4444;
+            --radius: 0.5rem;
         }
         * { box-sizing: border-box; }
         body {
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
             height: 100vh;
             display: flex;
             flex-direction: column;
             color: var(--text);
-            background: var(--gris);
+            background: var(--bg);
         }
         header {
-            background: var(--bleu);
-            color: var(--blanc);
-            padding: 14px 22px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
             display: flex;
             gap: 12px;
             align-items: center;
             flex-wrap: wrap;
-            border-bottom: 4px solid var(--jaune);
         }
         .brand {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 600;
             flex: 1;
-        }
-        .brand::before {
-            content: '';
-            width: 26px;
-            height: 26px;
-            background: var(--jaune);
-            border-radius: 5px;
-            display: inline-block;
+            color: var(--text);
         }
         select {
-            padding: 9px 12px;
-            border-radius: 8px;
-            border: none;
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
             font-size: 14px;
-            background: var(--blanc);
-            color: var(--bleu);
-            font-weight: 600;
+            background: var(--card);
+            color: var(--text);
             cursor: pointer;
         }
         button {
-            background: var(--jaune);
-            color: var(--bleu);
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: var(--radius);
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 14px;
-            transition: transform .15s, filter .15s;
+            transition: background .15s, opacity .15s;
         }
-        button:hover { transform: translateY(-1px); filter: brightness(0.95); }
-        .saved { font-size: 12px; color: var(--jaune); opacity: 0; transition: opacity .3s; }
+        button:hover { opacity: 0.9; }
+        .saved { font-size: 12px; color: var(--ok); opacity: 0; transition: opacity .3s; }
         .saved.show { opacity: 1; }
         main { display: flex; flex: 1; min-height: 0; }
         aside {
             width: 320px;
-            background: var(--blanc);
-            border-right: 1px solid #E2E5EB;
+            background: var(--card);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
         }
         .mission {
-            padding: 22px;
-            border-bottom: 1px solid #E2E5EB;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
         }
         .mission h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 26px;
-            color: var(--bleu);
-            margin: 0 0 12px;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 10px;
+            color: var(--text);
         }
         .mission p {
             font-size: 14px;
-            line-height: 1.65;
+            line-height: 1.6;
             color: var(--muted);
             margin: 0;
         }
-        .mission strong { color: var(--bleu); }
+        .mission strong { color: var(--text); }
         .progress {
-            padding: 18px 22px;
+            padding: 16px 20px;
             display: grid;
             grid-template-columns: repeat(11, 1fr);
             gap: 5px;
         }
         .dot {
-            height: 8px;
-            border-radius: 4px;
-            background: #E2E5EB;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
         }
-        .dot.done { background: var(--jaune); }
+        .dot.done { background: var(--ok); }
         .editor-wrap { flex: 1; display: flex; flex-direction: column; min-width: 0; }
         textarea {
             flex: 1;
@@ -125,31 +116,37 @@
             border: none;
             resize: none;
             outline: none;
-            background: #0d1117;
-            color: #c9d1d9;
+            background: #0c0c0e;
+            color: #e4e4e7;
             line-height: 1.55;
         }
         .toolbar {
             padding: 10px 16px;
-            background: var(--bleu-light);
+            background: var(--card);
+            border-top: 1px solid var(--border);
             display: flex;
             gap: 10px;
             align-items: center;
         }
-        .toolbar button { background: var(--blanc); }
+        .toolbar button {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .toolbar button:hover { background: var(--card-hover); }
         .output-wrap {
             width: 360px;
-            background: var(--blanc);
-            border-left: 1px solid #E2E5EB;
+            background: var(--card);
+            border-left: 1px solid var(--border);
             display: flex;
             flex-direction: column;
         }
         .output-head {
-            padding: 16px 18px;
-            background: var(--jaune-soft);
-            border-bottom: 1px solid #FCE89D;
-            font-weight: 700;
-            color: var(--bleu);
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text);
         }
         #out {
             flex: 1;
@@ -158,13 +155,13 @@
             white-space: pre-wrap;
             font-family: monospace;
             font-size: 14px;
+            color: var(--text);
         }
         #out div { margin-bottom: 6px; }
         #out .err { color: var(--err); }
         #out .ok { color: var(--ok); font-weight: 600; }
         #out .info { color: var(--muted); font-style: italic; }
 
-        /* Success animation */
         .success-overlay {
             position: fixed;
             inset: 0;
@@ -175,38 +172,39 @@
             z-index: 2000;
             opacity: 0;
             transition: opacity .3s;
+            background: rgba(0,0,0,.6);
         }
         .success-overlay.show { opacity: 1; }
         .success-card {
-            background: var(--blanc);
-            border: 4px solid var(--jaune);
-            border-radius: 24px;
-            padding: 40px 50px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 44px;
             text-align: center;
-            box-shadow: 0 30px 80px rgba(10,30,63,.25);
-            transform: scale(0.8);
-            transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+            box-shadow: 0 20px 60px rgba(0,0,0,.5);
+            transform: scale(0.95);
+            transition: transform .25s ease-out;
         }
         .success-overlay.show .success-card { transform: scale(1); }
         .success-card .check {
-            width: 80px;
-            height: 80px;
-            background: var(--jaune);
+            width: 64px;
+            height: 64px;
+            background: var(--ok);
             border-radius: 50%;
-            margin: 0 auto 18px;
+            margin: 0 auto 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            color: var(--bleu);
+            font-size: 30px;
+            color: var(--primary-foreground);
         }
         .success-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            color: var(--bleu);
-            margin: 0 0 8px;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 6px;
+            color: var(--text);
         }
-        .success-card p { margin: 0; color: var(--muted); font-size: 15px; }
+        .success-card p { margin: 0; color: var(--muted); font-size: 14px; }
 
         @keyframes confetti-fall {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
@@ -214,12 +212,12 @@
         }
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             top: -10px;
             z-index: 1999;
             pointer-events: none;
-            animation: confetti-fall 2.5s ease-out forwards;
+            animation: confetti-fall 2.2s ease-out forwards;
         }
 
         @media (max-width: 900px) {
@@ -231,7 +229,7 @@
 <body>
 
 <header>
-    <div class="brand">La Poste Academy</div>
+    <div class="brand">JS Academy — Générateur de MDP</div>
     <select id="it" onchange="loadIt(this.value)"></select>
     <button onclick="run()">▶ Run</button>
     <span class="saved" id="saved">Code sauvegardé ✓</span>
