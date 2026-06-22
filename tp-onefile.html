@@ -472,8 +472,11 @@ function run() {
         }
     };
 
-    const originalInnerHTML = Object.getOwnPropertyDescriptor(Element.prototype, "innerHTML");
+    // Intercept innerHTML writes on the output panel to detect HTML missions
+    let ownDesc = Object.getOwnPropertyDescriptor(outEl, "innerHTML");
+    const originalInnerHTML = ownDesc || Object.getOwnPropertyDescriptor(Element.prototype, "innerHTML");
     Object.defineProperty(outEl, "innerHTML", {
+        configurable: true,
         set: function(v) {
             htmlChanged = v;
             originalInnerHTML.set.call(this, v);
