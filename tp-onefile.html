@@ -95,6 +95,13 @@
             margin: 0;
         }
         .mission strong { color: var(--text); }
+        .mission code {
+            background: var(--card-hover);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
         .progress {
             padding: 16px 20px;
             display: grid;
@@ -270,8 +277,11 @@
 
 <script>
 const baseCode = {
-    1: `// Mission : fais dire bonjour à la console
-// Écris ton premier console.log ci-dessous :
+    1: `// Exemple :
+console.log("hello world!");
+
+// Mission : affiche "Salut + ton prénom !"
+// Écris ton code ci-dessous :
 `,
 
     2: `// Mission : crée une variable et affiche-la
@@ -361,8 +371,8 @@ console.log("Mot de passe : " + mdp);
 `};
 
 const missions = {
-    1: { title: "Itération 1 : Console", text: "Écris ton premier <strong>console.log</strong>. Affiche le texte <strong>Bonjour, monde !</strong> dans la console de droite.", check: logs => logs.some(l => l.toLowerCase().includes("bonjour")) },
-    2: { title: "Itération 2 : Variables", text: "Crée une variable <strong>nom</strong> et affiche-la. La sortie doit contenir <strong>La Poste</strong>.", check: logs => logs.some(l => l.includes("La Poste")) },
+    1: { title: "Itération 1 : Console", text: "Voici un exemple : <code>console.log('hello world!')</code>.<br>Mission : affiche <strong>Salut + ton prénom !</strong>", check: logs => logs.some(l => l.toLowerCase().includes("salut")) },
+    2: { title: "Itération 2 : Variables", text: "Crée une variable <strong>nom</strong> et affiche-la. La sortie doit contenir <strong>JS Academy</strong>.", check: logs => logs.some(l => l.includes("JS Academy")) },
     3: { title: "Itération 3 : Tableaux", text: "Utilise les lettres du tableau pour former le mot <strong>ace</strong> (1ère + 3ème + 5ème lettre).", check: logs => logs.some(l => l.includes("ace")) },
     4: { title: "Itération 4 : Boucle", text: "Affiche les nombres <strong>1 2 3 4 5</strong> avec une boucle for.", check: logs => logs.join(" ").includes("1") && logs.join(" ").includes("5") },
     5: { title: "Itération 5 : Aléatoire", text: "Utilise <strong>randomInt(1, 6)</strong> pour lancer un dé. Le résultat doit être entre 1 et 6.", check: logs => logs.some(l => /^[1-6]$/.test(l.trim())) },
