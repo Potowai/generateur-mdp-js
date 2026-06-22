@@ -270,26 +270,33 @@
 <script>
 const baseCode = {
     1: `// Mission : fais dire bonjour à la console
-console.log("Bonjour, monde !");`,
+// Écris ton premier console.log ci-dessous :
+`,
 
     2: `// Mission : crée une variable et affiche-la
-let nom = "La Poste";
-console.log("Groupe : " + nom);`,
+// 1. Crée une variable nom qui contient "JS Academy"
+// 2. Affiche-la avec console.log
+`,
 
     3: `// Mission : utilise les lettres du tableau pour former le mot "ace"
 let lettres = ["a", "b", "c", "d", "e"];
-console.log(lettres[0] + lettres[2] + lettres[4]);`,
+// Utilise lettres[?] pour afficher "ace"
+`,
 
     4: `// Mission : affiche les nombres de 1 à 5 avec une boucle
+// Complète la boucle for ci-dessous :
 for (let i = 1; i <= 5; i++) {
-    console.log(i);
-}`,
+    // écris ici
+}
+`,
 
     5: `// Mission : lance un dé (nombre entre 1 et 6)
+// Complète la fonction randomInt :
 function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return // à compléter
 }
-console.log(randomInt(1, 6));`,
+console.log(randomInt(1, 6));
+`,
 
     6: `// Mission : génère un mot de passe de 6 lettres minuscules
 function randomInt(min, max) {
@@ -297,10 +304,10 @@ function randomInt(min, max) {
 }
 let alphabet = "abcdefghijklmnopqrstuvwxyz";
 let mdp = "";
-for (let i = 0; i < 6; i++) {
-    mdp += alphabet[randomInt(0, alphabet.length - 1)];
-}
-console.log(mdp);`,
+// Ajoute une boucle for ici
+
+console.log(mdp);
+`,
 
     7: `// Mission : mot de passe avec minuscules ET majuscules
 function randomInt(min, max) {
@@ -309,14 +316,10 @@ function randomInt(min, max) {
 let minuscules = "abcdefghijklmnopqrstuvwxyz";
 let majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let mdp = "";
-for (let i = 0; i < 8; i++) {
-    if (Math.random() < 0.5) {
-        mdp += minuscules[randomInt(0, minuscules.length - 1)];
-    } else {
-        mdp += majuscules[randomInt(0, majuscules.length - 1)];
-    }
-}
-console.log(mdp);`,
+// Boucle de 8 tours : si random < 0.5 prend une minuscule, sinon une majuscule
+
+console.log(mdp);
+`,
 
     8: `// Mission : mot de passe avec tous les types de caractères
 function randomInt(min, max) {
@@ -324,29 +327,24 @@ function randomInt(min, max) {
 }
 let caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
 let mdp = "";
-for (let i = 0; i < 12; i++) {
-    mdp += caracteres[randomInt(0, caracteres.length - 1)];
-}
-console.log(mdp);`,
+// Boucle de 12 tours
+
+console.log(mdp);
+`,
 
     9: `// Mission : modifie la zone de droite avec du HTML
-let out = document.getElementById("out");
-out.innerHTML = '<div class="ok">Bravo, tu maîtrises le HTML !</div>';`,
+// Utilise document.getElementById("out") pour changer le contenu
+`,
 
     10: `// Mission : génère deux mots de passe avec une fonction
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function generer() {
-    let caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
-    let mdp = "";
-    for (let i = 0; i < 12; i++) {
-        mdp += caracteres[randomInt(0, caracteres.length - 1)];
-    }
-    return mdp;
-}
+// Crée une fonction generer() qui retourne un mot de passe de 12 caractères
+
 console.log(generer());
-console.log(generer());`,
+console.log(generer());
+`,
 
     11: `// Mission : change la longueur du mot de passe avec une variable
 function randomInt(min, max) {
@@ -355,12 +353,11 @@ function randomInt(min, max) {
 let longueur = 16;
 let caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
 let mdp = "";
-for (let i = 0; i < longueur; i++) {
-    mdp += caracteres[randomInt(0, caracteres.length - 1)];
-}
+// Utilise la variable longueur dans la boucle
+
 console.log("Longueur : " + longueur);
-console.log("Mot de passe : " + mdp);`
-};
+console.log("Mot de passe : " + mdp);
+`};
 
 const missions = {
     1: { title: "Itération 1 : Console", text: "Écris ton premier <strong>console.log</strong>. Affiche le texte <strong>Bonjour, monde !</strong> dans la console de droite.", check: logs => logs.some(l => l.toLowerCase().includes("bonjour")) },
@@ -388,7 +385,7 @@ const savedEl = document.getElementById("saved");
 for (let i = 1; i <= 11; i++) {
     const opt = document.createElement("option");
     opt.value = i;
-    opt.textContent = "It. " + i;
+    opt.textContent = missions[i].title;
     itSelect.appendChild(opt);
 
     const dot = document.createElement("div");
@@ -500,6 +497,7 @@ function run() {
 
     if (missions[n].check(logs, htmlChanged)) {
         outEl.innerHTML += '<div class="ok">✓ Mission réussie !</div>';
+        saveIt(n);
         showSuccess(n);
     }
 }
@@ -507,8 +505,6 @@ function run() {
 codeEl.addEventListener("keydown", e => {
     if (e.ctrlKey && e.key === "Enter") run();
 });
-
-codeEl.addEventListener("input", () => saveIt(parseInt(itSelect.value)));
 
 loadIt(1);
 </script>
