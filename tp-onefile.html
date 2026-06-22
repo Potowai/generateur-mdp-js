@@ -249,6 +249,7 @@
         <div class="toolbar">
             <button onclick="resetIt()">↻ Reset</button>
             <button onclick="clearOut()">Effacer sortie</button>
+            <button onclick="saveCurrent()" class="btn-save">💾 Sauvegarder</button>
             <span style="color:#fff;font-size:12px;margin-left:auto;">Ctrl+Enter pour exécuter</span>
         </div>
     </div>
@@ -414,6 +415,10 @@ function saveIt(n) {
     setTimeout(() => savedEl.classList.remove("show"), 1200);
 }
 
+function saveCurrent() {
+    saveIt(parseInt(itSelect.value));
+}
+
 function resetIt() {
     const n = parseInt(itSelect.value);
     if (confirm("Revenir au code de départ de l'itération ?")) {
@@ -497,7 +502,6 @@ function run() {
 
     if (missions[n].check(logs, htmlChanged)) {
         outEl.innerHTML += '<div class="ok">✓ Mission réussie !</div>';
-        saveIt(n);
         showSuccess(n);
     }
 }
