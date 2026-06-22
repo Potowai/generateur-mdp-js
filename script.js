@@ -61,19 +61,24 @@ function setGlow(color) {
 
 // ---- Password generator ----
 function genererMotDePasse() {
-    let chars = "abcdefghijklmnopqrstuvwxyz";
-    if (chkMaj.checked) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (chkChiffres.checked) chars += "0123456789";
-    if (chkSymboles.checked) chars += "!@#$%&*";
+    let minuscules = "abcdefghijklmnopqrstuvwxyz";
+    let majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let chiffres = "0123456789";
+    let symboles = "!@#$%&*";
+    let tout = minuscules + majuscules + chiffres + symboles;
 
-    if (!chkMaj.checked && !chkChiffres.checked && !chkSymboles.checked) {
-        chars = "abcdefghijklmnopqrstuvwxyz";
-    }
-
-    const longueur = parseInt(slider.value);
+    let longueur = parseInt(slider.value);
     let mdp = "";
-    for (let i = 0; i < longueur; i++) {
-        mdp += chars[randomInt(0, chars.length - 1)];
+
+    // 1 garanti de chaque type coché
+    if (chkMaj.checked) mdp += majuscules[randomInt(0, majuscules.length - 1)];
+    if (chkChiffres.checked) mdp += chiffres[randomInt(0, chiffres.length - 1)];
+    if (chkSymboles.checked) mdp += symboles[randomInt(0, symboles.length - 1)];
+
+    // 2 remplir le reste
+    let reste = longueur - mdp.length;
+    for (let i = 0; i < reste; i++) {
+        mdp += tout[randomInt(0, tout.length - 1)];
     }
     resultat.textContent = mdp;
 

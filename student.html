@@ -261,40 +261,32 @@ let mode = "mdp"; // "mdp" ou "phrase"
 
 // ----- Fonction : générer un mot de passe -----
 function genererMdp() {
-    let caracteres = "abcdefghijklmnopqrstuvwxyz";
-    if (document.getElementById("CheckBoxMajuscules").checked) caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (document.getElementById("CheckBoxChiffres").checked) caracteres += "0123456789";
-    if (document.getElementById("CheckBoxSymboles").checked) caracteres += "!@#$%&*";
+    let minuscules = "abcdefghijklmnopqrstuvwxyz";
+    let majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let chiffres = "0123456789";
+    let symboles = "!@#$%&*";
+    let tout = minuscules + majuscules + chiffres + symboles;
 
-    // 💡 ASTUCE : pour être sûr d'avoir au moins un caractère de
-    // chaque type coché, on fait 2 étapes :
+    // 💡 ASTUCE SIMPLE : on met 1 caractère de chaque type coché
+    // au début du mot de passe, comme ça on est SÛR qu'il y en a.
     //
-    // ÉTAPE 1 : piocher 1 caractère dans chaque type coché
+    //   let mdp = "";
     //
-    //   let types = [];
-    //   if (document.getElementById("CheckBoxMajuscules").checked)
-    //       types.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    //   if (document.getElementById("CheckBoxChiffres").checked)
-    //       types.push("0123456789");
-    //   if (document.getElementById("CheckBoxSymboles").checked)
-    //       types.push("!@#$%&*");
+    //   if (chkMaj.checked)
+    //       mdp += majuscules[randomInt(0, majuscules.length - 1)];
+    //   if (chkChiffres.checked)
+    //       mdp += chiffres[randomInt(0, chiffres.length - 1)];
+    //   if (chkSymboles.checked)
+    //       mdp += symboles[randomInt(0, symboles.length - 1)];
     //
-    //   for (let t = 0; t < types.length; t++) {
-    //       mdp += types[t][randomInt(0, types[t].length - 1)];
+    //   // Remplir le reste avec tous les caractères
+    //   let reste = longueur - mdp.length;
+    //   for (let i = 0; i < reste; i++) {
+    //       mdp += tout[randomInt(0, tout.length - 1)];
     //   }
     //
-    // ÉTAPE 2 : remplir le reste avec tous les caractères
-    //
-    //   for (let i = types.length; i < longueur; i++) {
-    //       let index = randomInt(0, caracteres.length - 1);
-    //       mdp += caracteres[index];
-    //   }
-    //
-    // → Comme ça, si l'utilisateur coche "Symboles", le mot de
-    //   passe contiendra forcément au moins un !@#$%&amp;*
-    //
-    // Maintenant, à toi d'implémenter cette version dans le code
-    // ci-dessous ! Remplace les lignes marquées "Écris ton code ici".
+    // Essaye ! Copie ce code juste en dessous en changeant
+    // les noms des cases (document.getElementById(...)).
 
     let longueur = parseInt(document.getElementById("SliderLongueur").value);
     let mdp = "";
