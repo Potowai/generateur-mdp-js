@@ -1,3 +1,0 @@
-@echo off
-echo Ouverture du generateur de mots de passe...
-start index.html
