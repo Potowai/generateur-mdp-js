@@ -1,0 +1,86 @@
+/*
+  Style simple pour le générateur de mots de passe.
+  On centre tout, on met un fond sombre, et des couleurs vives.
+*/
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    min-width: 320px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    margin-top: 0;
+    color: #00d9ff;
+    font-size: 26px;
+}
+
+.resultat {
+    background: #0f3460;
+    padding: 25px;
+    font-size: 24px;
+    font-family: monospace;
+    margin: 25px 0;
+    border-radius: 10px;
+    letter-spacing: 3px;
+    word-break: break-all;
+    min-height: 30px;
+}
+
+button {
+    background: linear-gradient(135deg, #e94560, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 5px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(233, 69, 96, 0.4);
+}
+
+.btn-secondaire {
+    background: linear-gradient(135deg, #00d9ff, #0099cc);
+}
+
+.options {
+    margin: 20px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #a0d468;
+    min-height: 20px;
+}
