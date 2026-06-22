@@ -182,37 +182,37 @@
 
     <!-- Choisis le mode -->
     <div class="toggle">
-        <button id="btnMdp" class="on" onclick="mode='mdp'; rafraichir();">Mot de passe</button>
-        <button id="btnPhrase" onclick="mode='phrase'; rafraichir();">Phrase de passe</button>
+        <button id="BoutonMdp" class="on" onclick="mode='mdp'; rafraichir();">Mot de passe</button>
+        <button id="BoutonPhrase" onclick="mode='phrase'; rafraichir();">Phrase de passe</button>
     </div>
 
     <!-- Résultat -->
-    <div class="resultat" id="resultat">Clique sur Générer</div>
+    <div class="resultat" id="Resultat">Clique sur Générer</div>
 
     <!-- Options mot de passe -->
     <div id="optMdp">
         <div class="opt">
-            <label>Longueur <span id="lblLong">12</span></label>
-            <input type="range" id="slLong" min="6" max="128" value="12" oninput="majSlider()">
+            <label>Longueur <span id="LabelLongueur">12</span></label>
+            <input type="range" id="SliderLongueur" min="6" max="128" value="12" oninput="majSlider()">
             <div class="hint"><span>6</span><span>128</span></div>
         </div>
         <div class="grp">
-            <label><input type="checkbox" id="chkMaj" checked onchange="generer()"><span>A–Z</span></label>
-            <label><input type="checkbox" id="chkChif" checked onchange="generer()"><span>0–9</span></label>
-            <label><input type="checkbox" id="chkSym" checked onchange="generer()"><span>!@#$%&amp;*</span></label>
+            <label><input type="checkbox" id="CheckBoxMajuscules" checked onchange="generer()"><span>A–Z</span></label>
+            <label><input type="checkbox" id="CheckBoxChiffres" checked onchange="generer()"><span>0–9</span></label>
+            <label><input type="checkbox" id="CheckBoxSymboles" checked onchange="generer()"><span>!@#$%&amp;*</span></label>
         </div>
     </div>
 
     <!-- Options phrase de passe -->
     <div id="optPhrase" style="display:none">
         <div class="opt">
-            <label>Nombre de mots <span id="lblMots">4</span></label>
-            <input type="range" id="slMots" min="2" max="8" value="4" oninput="majSlider()">
+            <label>Nombre de mots <span id="LabelMots">4</span></label>
+            <input type="range" id="SliderMots" min="2" max="8" value="4" oninput="majSlider()">
             <div class="hint"><span>2</span><span>8</span></div>
         </div>
         <div class="grp">
-            <label><input type="checkbox" id="chkCap" checked onchange="generer()"><span>Majuscule 1ère lettre</span></label>
-            <label><input type="checkbox" id="chkNb" onchange="generer()"><span>+ chiffre à la fin</span></label>
+            <label><input type="checkbox" id="CheckBoxPhraseMajuscules" checked onchange="generer()"><span>Majuscule 1ère lettre</span></label>
+            <label><input type="checkbox" id="CheckBoxPhraseNombres" onchange="generer()"><span>+ chiffre à la fin</span></label>
         </div>
     </div>
 
@@ -222,7 +222,7 @@
         <button class="btn btn-sec" onclick="copier()">Copier</button>
     </div>
 
-    <p class="msg" id="msg"></p>
+    <p class="msg" id="Message"></p>
 
 </div>
 
@@ -261,29 +261,55 @@ let mode = "mdp"; // "mdp" ou "phrase"
 
 // ----- Fonction : générer un mot de passe -----
 function genererMdp() {
-    // Construire le "sac" de caractères
-    let sac = "abcdefghijklmnopqrstuvwxyz";
-    if (document.getElementById("chkMaj").checked) sac += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (document.getElementById("chkChif").checked) sac += "0123456789";
-    if (document.getElementById("chkSym").checked) sac += "!@#$%&*";
+    let caracteres = "abcdefghijklmnopqrstuvwxyz";
+    if (document.getElementById("CheckBoxMajuscules").checked) caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if (document.getElementById("CheckBoxChiffres").checked) caracteres += "0123456789";
+    if (document.getElementById("CheckBoxSymboles").checked) caracteres += "!@#$%&*";
 
-    let longueur = parseInt(document.getElementById("slLong").value);
+    // 💡 ASTUCE : pour être sûr d'avoir au moins un caractère de
+    // chaque type coché, on fait 2 étapes :
+    //
+    // ÉTAPE 1 : piocher 1 caractère dans chaque type coché
+    //
+    //   let types = [];
+    //   if (document.getElementById("CheckBoxMajuscules").checked)
+    //       types.push("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    //   if (document.getElementById("CheckBoxChiffres").checked)
+    //       types.push("0123456789");
+    //   if (document.getElementById("CheckBoxSymboles").checked)
+    //       types.push("!@#$%&*");
+    //
+    //   for (let t = 0; t < types.length; t++) {
+    //       mdp += types[t][randomInt(0, types[t].length - 1)];
+    //   }
+    //
+    // ÉTAPE 2 : remplir le reste avec tous les caractères
+    //
+    //   for (let i = types.length; i < longueur; i++) {
+    //       let index = randomInt(0, caracteres.length - 1);
+    //       mdp += caracteres[index];
+    //   }
+    //
+    // → Comme ça, si l'utilisateur coche "Symboles", le mot de
+    //   passe contiendra forcément au moins un !@#$%&amp;*
+    //
+    // Maintenant, à toi d'implémenter cette version dans le code
+    // ci-dessous ! Remplace les lignes marquées "Écris ton code ici".
+
+    let longueur = parseInt(document.getElementById("SliderLongueur").value);
     let mdp = "";
 
     // Boucle : on pioche au hasard (tu reconnais ?)
-    for (let i = 0; i < longueur; i++) {
-        let index = randomInt(0, sac.length - 1);
-        mdp += sac[index];
-    }
-
-    document.getElementById("resultat").textContent = mdp;
+    // Ecris le code ici pour générer le mot de passe
+    mdp = "Modifie ce code pour générer ton mot de passe !";
+    document.getElementById("Resultat").textContent = mdp;
 }
 
 // ----- Fonction : générer une phrase de passe -----
 function genererPhrase() {
-    let nb = parseInt(document.getElementById("slMots").value);
-    let capital = document.getElementById("chkCap").checked;
-    let chiffre = document.getElementById("chkNb").checked;
+    let nb = parseInt(document.getElementById("SliderMots").value);
+    let capital = document.getElementById("CheckBoxPhraseMajuscules").checked;
+    let chiffre = document.getElementById("CheckBoxPhraseNombres").checked;
 
     let liste = [];
     for (let i = 0; i < nb; i++) {
@@ -297,27 +323,27 @@ function genererPhrase() {
     let phrase = liste.join("-");
     if (chiffre) phrase += randomInt(0, 99);
 
-    document.getElementById("resultat").textContent = phrase;
+    document.getElementById("Resultat").textContent = phrase;
 }
 
 // ----- Fonction principale -----
 function generer() {
     if (mode === "mdp") genererMdp();
     else genererPhrase();
-    document.getElementById("msg").textContent = "";
+    document.getElementById("Message").textContent = "";
 }
 
 // ----- Mise à jour des sliders -----
 function majSlider() {
-    document.getElementById("lblLong").textContent = document.getElementById("slLong").value;
-    document.getElementById("lblMots").textContent = document.getElementById("slMots").value;
+    document.getElementById("LabelLongueur").textContent = document.getElementById("SliderLongueur").value;
+    document.getElementById("LabelMots").textContent = document.getElementById("SliderMots").value;
     generer();
 }
 
 // ----- Changer de mode -----
 function rafraichir() {
-    document.getElementById("btnMdp").className = mode === "mdp" ? "on" : "";
-    document.getElementById("btnPhrase").className = mode === "phrase" ? "on" : "";
+    document.getElementById("BoutonMdp").className = mode === "mdp" ? "on" : "";
+    document.getElementById("BoutonPhrase").className = mode === "phrase" ? "on" : "";
     document.getElementById("optMdp").style.display = mode === "mdp" ? "" : "none";
     document.getElementById("optPhrase").style.display = mode === "phrase" ? "" : "none";
     generer();
@@ -328,7 +354,7 @@ function copier() {
     let txt = document.getElementById("resultat").textContent;
     if (!txt || txt === "Clique sur Générer") return;
     navigator.clipboard.writeText(txt).then(() => {
-        let m = document.getElementById("msg");
+        let m = document.getElementById("Message");
         m.textContent = "Copié !";
         m.className = "msg ok";
         setTimeout(() => { m.textContent = ""; m.className = "msg"; }, 2000);
