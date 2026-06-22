@@ -4,27 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générateur de Mots de Passe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>🔐 Générateur de Mots de Passe</h1>
+        <div class="brand">🔐 Générateur</div>
+        <h1>Mot de passe &amp; Phrase de passe</h1>
 
-        <!-- Affichage du résultat en temps réel -->
-        <div class="resultat" id="resultat">Clique sur Générer</div>
-
-        <!-- Options -->
-        <div class="options">
-            <label for="slider">Longueur : <span id="longueurAffichage">12</span></label>
-            <input type="range" id="slider" min="6" max="24" value="12">
+        <!-- Toggle mode -->
+        <div class="mode-toggle">
+            <button id="btnPassword" class="mode-btn active">Mot de passe</button>
+            <button id="btnPassphrase" class="mode-btn">Phrase de passe</button>
         </div>
 
-        <!-- Boutons -->
-        <button id="bouton">Générer</button>
-        <button id="copier" class="btn-secondaire">Copier</button>
+        <!-- Result -->
+        <div class="resultat" id="resultat">Clique sur Générer</div>
 
-        <!-- Petite zone d'aide / messages pour les élèves -->
+        <!-- Password options (visible en mode mot de passe) -->
+        <div id="passwordOptions">
+            <div class="options">
+                <label>Longueur : <span id="longueurAffichage">16</span></label>
+                <input type="range" id="slider" min="6" max="128" value="16">
+                <div class="range-labels">
+                    <span>6</span>
+                    <span class="strength" id="strengthLabel">Moyen</span>
+                    <span>128</span>
+                </div>
+            </div>
+            <div class="checkboxes">
+                <label class="check-label"><input type="checkbox" id="chkMaj" checked> Majuscules</label>
+                <label class="check-label"><input type="checkbox" id="chkChiffres" checked> Chiffres</label>
+                <label class="check-label"><input type="checkbox" id="chkSymboles" checked> Symboles</label>
+            </div>
+        </div>
+
+        <!-- Passphrase options (visible en mode phrase de passe) -->
+        <div id="passphraseOptions" style="display:none;">
+            <div class="options">
+                <label>Nombre de mots : <span id="nbMotsAffichage">4</span></label>
+                <input type="range" id="sliderMots" min="2" max="8" value="4">
+                <div class="range-labels">
+                    <span>2</span>
+                    <span id="sepLabel">séparateur : -</span>
+                    <span>8</span>
+                </div>
+            </div>
+            <div class="checkboxes">
+                <label class="check-label"><input type="checkbox" id="chkMajPremier" checked> Majuscule 1ère lettre</label>
+                <label class="check-label"><input type="checkbox" id="chkChiffreFin"> Ajouter un chiffre à la fin</label>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button id="bouton">Générer</button>
+            <button id="copier" class="btn-secondaire">Copier</button>
+        </div>
+
         <p id="message" class="message"></p>
     </div>
 
