@@ -1,6 +1,6 @@
 # 🔐 Générateur de Mots de Passe — TP JavaScript
 
-Un projet pédagogique complet pour apprendre JavaScript en créant un générateur de mots de passe et phrases de passe, destiné aux élèves de 14 ans débutant·e·s en programmation.
+Un projet pédagogique complet pour apprendre JavaScript en créant un générateur de mots de passe et phrases de passe, destiné aux stagiaires débutant·e·s en programmation.
 
 ---
 
@@ -8,7 +8,7 @@ Un projet pédagogique complet pour apprendre JavaScript en créant un générat
 
 | Fichier | Description |
 |---|---|
-| **tp-onefile.html** | TP interactif avec 13 itérations auto-guidées, éditeur de code intégré, validation automatique et sauvegarde. |
+| **tp-stagiaires.html** | TP interactif avec 13 itérations auto-guidées, éditeur de code intégré, validation automatique et sauvegarde. |
 | **index.html** | Version "professionnelle" du générateur (design shadcn dark) — slider 6–128, force du mot de passe, mode phrase de passe. |
 | **student.html** | Version simplifiée pour les élèves — 1 fichier déployable sur Netlify Drop, code commenté à compléter. |
 | **student-style.css** | Styles de la version student. |
@@ -52,7 +52,7 @@ Tous les fichiers `.html` sont prêts pour **Netlify Drop** :
 ## 🛠 Utilisation
 
 ### TP guidé (pour la classe)
-Ouvrir `tp-onefile.html` dans un navigateur. Les élèves suivent les itérations dans l'ordre.
+Ouvrir `tp-stagiaire.html` dans un navigateur. Les élèves suivent les itérations dans l'ordre.
 
 ### Générateur autonome
 Ouvrir `index.html` — deux modes (mot de passe / phrase de passe), slider jusqu'à 128 caractères, indicateur de force visuel.
