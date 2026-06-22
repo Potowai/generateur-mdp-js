@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Poste — Votre quotidien, livré</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo-mark"></span>
+            <span class="logo-text">La Poste</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#suivi">Suivi</a></li>
+            <li><a href="#agences">Agences</a></li>
+            <li><a href="#aide">Aide</a></li>
+        </ul>
+        <a href="#connexion" class="nav-cta">Mon compte</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <p class="eyebrow">Depuis 1576</p>
+                <h1>
+                    <span class="line">Votre quotidien,</span>
+                    <span class="line accent">livré.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    La Poste réinvente l'art de la proximité. Envoi, réception, suivi et services bancaires, dans un écrin digital pensé pour vous.
+                </p>
+                <div class="hero-actions">
+                    <a href="#expedier" class="btn btn-primary">Expédier un colis</a>
+                    <a href="#suivre" class="btn btn-outline">Suivre un envoi</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="envelope" aria-hidden="true">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body"></div>
+                    <div class="envelope-stamp"></div>
+                </div>
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div class="floating-card card-1">
+                    <span class="dot"></span>
+                    <span>Livré aujourd'hui</span>
+                </div>
+                <div class="floating-card card-2">
+                    <strong>24h</strong>
+                    <span>en France</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="track-section" id="suivre">
+        <div class="track-box">
+            <label for="tracking-input">Numéro de suivi</label>
+            <div class="track-input-wrap">
+                <input type="text" id="tracking-input" placeholder="AB123456789FR">
+                <button class="btn btn-primary" id="track-btn">Suivre</button>
+            </div>
+            <p class="track-help">Trouvez votre numéro sur votre bordereau d'envoi ou dans l'email de confirmation.</p>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <p class="eyebrow">Nos services</p>
+            <h2>Tout ce dont vous avez besoin, à portée de clic.</h2>
+        </div>
+        <div class="bento-grid">
+            <article class="bento-card large">
+                <div class="card-icon">✉</div>
+                <h3>Envoyer du courrier</h3>
+                <p>Lettres, recommandés, plis : imprimez vos timbres en ligne et envoyez sans attendre.</p>
+                <a href="#">Envoyer un courrier →</a>
+            </article>
+            <article class="bento-card">
+                <div class="card-icon">📦</div>
+                <h3>Expédier un colis</h3>
+                <p>France et international. Choisissez la livraison qui vous convient.</p>
+                <a href="#">Expédier →</a>
+            </article>
+            <article class="bento-card">
+                <div class="card-icon">🏠</div>
+                <h3>Recevoir chez moi</h3>
+                <p>Planifiez vos livraisons et choisissez votre créneau.</p>
+                <a href="#">Gérer mes livraisons →</a>
+            </article>
+            <article class="bento-card">
+                <div class="card-icon">🏦</div>
+                <h3>La Banque Postale</h3>
+                <p>Comptes, épargne, crédits : votre banque au quotidien.</p>
+                <a href="#">Découvrir →</a>
+            </article>
+            <article class="bento-card wide">
+                <div class="card-icon">📍</div>
+                <h3>Trouver une agence</h3>
+                <p>Plus de 17 000 points de contact à travers la France.</p>
+                <a href="#">Localiser →</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat">
+                <span class="stat-number" data-target="17">0</span><span class="stat-suffix">000</span>
+                <span class="stat-label">points de contact</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-target="99">0</span><span class="stat-suffix">%</span>
+                <span class="stat-label">de colis livrés à temps</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-target="24">0</span><span class="stat-suffix">/7</span>
+                <span class="stat-label">suivi en ligne</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number" data-target="30">0</span><span class="stat-suffix">M</span>
+                <span class="stat-label">clients satisfaits</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Prêt à expédier ?</h2>
+            <p>Créez votre envoi en quelques clics, imprimez votre étiquette et déposez votre colis au bureau de poste le plus proche.</p>
+            <a href="#" class="btn btn-primary btn-large">Commencer un envoi</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="logo-mark"></span>
+                <span class="logo-text">La Poste</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Données personnelles</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Nous contacter</a>
+            </div>
+        </div>
+        <p class="footer-copy">Design conceptuel réalisé à des fins pédagogiques. Non affilié à La Poste.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
