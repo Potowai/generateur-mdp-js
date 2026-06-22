@@ -15,7 +15,14 @@ Créer un générateur de mots de passe fonctionnel, étape par étape, sans con
 
 ## 🚀 Comment utiliser ce projet
 
-### Option 1 : Double-clic (le plus simple)
+### Option 0 : Faire le TP en direct (recommandé pour les élèves)
+
+1. Double-clique sur `tp.html`
+2. Clique sur une itération en haut (It. 1, It. 2...)
+3. Écris ton code à gauche, clique sur **Run** (ou `Ctrl + Enter`)
+4. Le résultat s'affiche à droite, `console.log()` y est aussi redirigé
+
+### Option 1 : Voir le projet final
 
 1. Ouvre le dossier `generateur-mdp-js`
 2. Double-clique sur `index.html`
@@ -36,9 +43,12 @@ Créer un générateur de mots de passe fonctionnel, étape par étape, sans con
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | Structure de la page (titre, boutons, zone de résultat) |
-| `style.css` | Apparence visuelle (couleurs, mise en page) |
-| `script.js` | La logique JavaScript (génération du mot de passe) |
+| `tp.html` | **Page interactive du TP** : éditeur JS + console intégrée à droite |
+| `index.html` | Projet final (générateur fonctionnel avec boutons) |
+| `style.css` | Apparence visuelle du projet final |
+| `script.js` | La logique JavaScript du projet final |
+| `README.md` | Guide pédagogique |
+| `start.bat` / `start.sh` | Ouvrir `index.html` dans le navigateur |
 
 ## 📚 Déroulement par itérations
 
