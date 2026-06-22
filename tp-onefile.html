@@ -316,8 +316,7 @@ console.log("Nombre aléatoire : " + randomInt(1, 6));
     6: `// Mission : découvre les conditions if / else
 let age = 14;
 
-// Complète le if pour afficher "majeur" si age est 18 ou plus, sinon "mineur"
-if (age >= 18) {
+if (age >= 0) {  // Remplace le 0 par le bon nombre pour que le code affiche "mineur"
     console.log("majeur");
 } else {
     console.log("mineur");
@@ -343,13 +342,10 @@ let minuscules = "abcdefghijklmnopqrstuvwxyz";
 let majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let mdp = "";
 
-// Boucle de 8 tours : si random < 0.5 prend une minuscule, sinon une majuscule
+// Boucle de 8 tours : ajoute un if/else (tu as appris à l'itération 6 !)
 for (let i = 0; i < 8; i++) {
-    if (Math.random() < 0.5) {
-        mdp += minuscules[randomInt(0, minuscules.length - 1)];
-    } else {
-        mdp += majuscules[randomInt(0, majuscules.length - 1)];
-    }
+    // if (Math.random() < 0.5) { prend une minuscule } else { prend une majuscule }
+    
 }
 console.log(mdp);
 `,
@@ -365,8 +361,10 @@ let mdp = "";
 console.log(mdp);
 `,
 
-    10: `// Mission : modifie la zone de droite avec du HTML
-// Utilise document.getElementById("out") pour changer le contenu
+    10: `// Mission : change le texte dans la zone de droite
+let out = document.getElementById("out");
+out.textContent = "Écris ton prénom ici !";
+// Ajoute console.log("Bravo") pour valider la mission
 `,
 
     11: `// Mission : génère deux mots de passe avec une fonction
@@ -398,11 +396,11 @@ const missions = {
     3: { title: "Itération 3 : Tableaux", text: "Utilise les lettres du tableau pour former le mot <strong>ace</strong> (1ère + 3ème + 5ème lettre).", check: logs => logs.some(l => l.includes("ace")) },
     4: { title: "Itération 4 : Boucle", text: "Affiche les nombres <strong>1 2 3 4 5</strong> avec une boucle for.", check: logs => logs.join(" ").includes("1") && logs.join(" ").includes("5") },
     5: { title: "Itération 5 : Aléatoire", text: "On te donne une fonction magique <strong>randomInt(min, max)</strong>. Modifie les deux nombres dans <strong>randomInt(?, ?)</strong> pour obtenir un nombre entre <strong>10</strong> et <strong>20</strong>.", check: logs => logs.some(l => { const n = parseInt(l.trim()); return n >= 10 && n <= 20; }) },
-    6: { title: "Itération 6 : Conditions", text: "Découvre <strong>if / else</strong>. Complète la condition pour que le code affiche <strong>mineur</strong> si age est inférieur à 18, sinon <strong>majeur</strong>.", check: logs => logs.some(l => l.includes("mineur")) || logs.some(l => l.includes("majeur")) },
+    6: { title: "Itération 6 : Conditions", text: "Découvre <strong>if / else</strong>. Change le nombre dans la condition pour que le programme affiche <strong>mineur</strong> (age = 14 n'est pas ≥ 18).", check: logs => logs.some(l => l.includes("mineur")) },
     7: { title: "Itération 7 : Générateur simple", text: "Génère un mot de passe de <strong>6 lettres minuscules</strong>.", check: logs => logs.some(l => /^[a-z]{6}$/.test(l.trim())) },
     8: { title: "Itération 8 : Majuscules", text: "Génère un mot de passe de <strong>8 caractères</strong> avec des minuscules et des majuscules.", check: logs => logs.some(l => /^[a-zA-Z]{8}$/.test(l.trim()) && /[a-z]/.test(l) && /[A-Z]/.test(l)) },
     9: { title: "Itération 9 : Tous les caractères", text: "Génère un mot de passe de <strong>12 caractères</strong> contenant lettres, chiffres et symboles.", check: logs => logs.some(l => /^[a-zA-Z0-9!@#$%&*]{12}$/.test(l.trim()) && /[a-z]/.test(l) && /[A-Z]/.test(l) && /[0-9]/.test(l) && /[!@#$%&*]/.test(l)) },
-    10: { title: "Itération 10 : HTML", text: "Modifie la zone de droite avec <strong>document.getElementById('out')</strong>.", check: (logs, html) => html.toLowerCase().includes("bravo") },
+    10: { title: "Itération 10 : HTML", text: "Utilise <strong>document.getElementById('out')</strong> pour changer le texte, puis ajoute <strong>console.log('Bravo')</strong>.", check: logs => logs.some(l => l.toLowerCase().includes("bravo")) },
     11: { title: "Itération 11 : Fonction", text: "Crée une fonction <strong>generer()</strong> et affiche deux mots de passe.", check: logs => logs.filter(l => /^[a-zA-Z0-9!@#$%&*]{12,}$/.test(l.trim())).length >= 2 },
     12: { title: "Itération 12 : Longueur variable", text: "Utilise une variable <strong>longueur</strong> pour choisir la taille du mot de passe.", check: logs => logs.some(l => l.toLowerCase().includes("longueur")) && logs.some(l => /^[a-zA-Z0-9!@#$%&*]{10,}$/.test(l.trim())) }
 };
