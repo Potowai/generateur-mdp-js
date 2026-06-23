@@ -18,6 +18,22 @@
             --ok: #22c55e;
             --err: #ef4444;
             --radius: 0.5rem;
+            --editor-bg: #0c0c0e;
+            --editor-fg: #e4e4e7;
+        }
+        [data-theme="light"] {
+            --bg: #f5f5f5;
+            --card: #ffffff;
+            --card-hover: #e5e5e5;
+            --border: #d4d4d8;
+            --text: #09090b;
+            --muted: #71717a;
+            --primary: #09090b;
+            --primary-foreground: #fafafa;
+            --ok: #16a34a;
+            --err: #dc2626;
+            --editor-bg: #fafafa;
+            --editor-fg: #18181b;
         }
         * { box-sizing: border-box; }
         body {
@@ -123,8 +139,8 @@
             border: none;
             resize: none;
             outline: none;
-            background: #0c0c0e;
-            color: #e4e4e7;
+            background: var(--editor-bg);
+            color: var(--editor-fg);
             line-height: 1.55;
         }
         .toolbar {
@@ -239,6 +255,7 @@
     <div class="brand">JS Academy — Générateur de MDP</div>
     <select id="it" onchange="loadIt(this.value)"></select>
     <button onclick="run()">▶ Run</button>
+    <button onclick="toggleTheme()" id="themeBtn" title="Changer le thème">🌙</button>
     <span class="saved" id="saved">Code sauvegardé ✓</span>
 </header>
 
@@ -551,6 +568,27 @@ codeEl.addEventListener("keydown", e => {
 });
 
 loadIt(1);
+
+// Theme toggle
+const savedTheme = localStorage.getItem("tp_theme");
+if (savedTheme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    document.getElementById("themeBtn").textContent = "☀️";
+}
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const isLight = html.getAttribute("data-theme") === "light";
+    if (isLight) {
+        html.removeAttribute("data-theme");
+        localStorage.setItem("tp_theme", "dark");
+        document.getElementById("themeBtn").textContent = "🌙";
+    } else {
+        html.setAttribute("data-theme", "light");
+        localStorage.setItem("tp_theme", "light");
+        document.getElementById("themeBtn").textContent = "☀️";
+    }
+}
 </script>
 </body>
 </html>

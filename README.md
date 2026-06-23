@@ -10,14 +10,14 @@ Un projet pédagogique complet pour apprendre JavaScript en créant un générat
 |---|---|
 | **tp-stagiaires.html** | TP interactif avec 13 itérations auto-guidées, éditeur de code intégré, validation automatique et sauvegarde. |
 | **index.html** | Version "professionnelle" du générateur (design shadcn dark) — slider 6–128, force du mot de passe, mode phrase de passe. |
-| **student.html** | Version simplifiée pour les élèves — 1 fichier déployable sur Netlify Drop, code commenté à compléter. |
-| **student-style.css** | Styles de la version student. |
 | **style.css** | Styles de la version index. |
 | **script.js** | Logique complète de la version index (mot de passe + phrase de passe + force + glow). |
+| **student/index.html** | Version simplifiée pour les élèves — 1 fichier déployable sur Netlify Drop, code commenté à compléter. |
+| **student/student-style.css** | Styles de la version student. |
 
 ---
 
-## 🎯 Objectifs pédagogiques (tp-onefile.html)
+## 🎯 Objectifs pédagogiques (tp-stagiaires.html)
 
 13 itérations progressives qui couvrent :
 
